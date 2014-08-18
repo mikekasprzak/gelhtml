@@ -35,7 +35,9 @@ function Step() {
 // - ----------------------------------------------------------------------------------------- - //
 function Draw() {
 	var c = subcanvas.ctx;
+	var c_canvas = c.canvas;
 	var out = ctx;
+	var out_canvas = out.canvas;
 
 
 	// "setTransform" resets to Identity. "transform" accumulates.
@@ -47,7 +49,7 @@ function Draw() {
 	
 //	c.clearRect(0, 0, c.canvas.width, c.canvas.height);
 	c.fillStyle = "rgb(40,20,30)";
-	c.fillRect(0, 0, c.canvas.width, c.canvas.height);
+	c.fillRect(0, 0, c_canvas.width, c_canvas.height);
 
 	c.setTransform(
 		Math.abs(Math.sin(Angle*0.0125)*3)+1,0,
@@ -62,8 +64,8 @@ function Draw() {
 		0,1,	// C D 0 //
 		0,0		// E F 1 //
 	);	
-	var HalfWidth = c.canvas.width>>1;
-	var HalfHeight = c.canvas.height>>1;
+	var HalfWidth = c_canvas.width>>1;
+	var HalfHeight = c_canvas.height>>1;
 	var Radian = Angle*2*Math.PI/360;
 	
 	c.translate( HalfWidth + (Math.cos(Radian) * HalfWidth / 2), HalfHeight + (Math.sin(Radian) * HalfHeight / 2) );
@@ -82,19 +84,19 @@ function Draw() {
 
 //		out.clearRect(0, 0, out.canvas.width, out.canvas.height);
 		out.fillStyle = "rgb(0,0,0)";
-		out.fillRect(0, 0, out.canvas.width, out.canvas.height);
+		out.fillRect(0, 0, out_canvas.width, out_canvas.height);
 
-		var scaleW = out.canvas.width / c.canvas.width | 0;
-		var scaleH = out.canvas.height / c.canvas.height | 0;
+		var scaleW = out_canvas.width / c_canvas.width | 0;
+		var scaleH = out_canvas.height / c_canvas.height | 0;
 		var scalar = scaleW > scaleH ? scaleH : scaleW;
 		
-		var newW = c.canvas.width * scalar;
-		var newH = c.canvas.height * scalar;
+		var newW = c_canvas.width * scalar;
+		var newH = c_canvas.height * scalar;
 		
-		out.drawImage(c.canvas,
+		out.drawImage(c_canvas,
 			0,0,
-			c.canvas.width,c.canvas.height,
-			(out.canvas.width-newW)*0.5,(out.canvas.height-newH)*0.5,
+			c_canvas.width,c_canvas.height,
+			(out_canvas.width-newW)*0.5,(out_canvas.height-newH)*0.5,
 			newW, newH);
 	}
 }
