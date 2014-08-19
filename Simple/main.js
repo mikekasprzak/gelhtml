@@ -1,6 +1,7 @@
 // - ----------------------------------------------------------------------------------------- - //
 var Food;
 var Bird;
+var Jayson;
 
 var Angle = 0;
 
@@ -13,10 +14,16 @@ function Setup() {
 	// Preload stuff //
 	Food = gelLoadImage("Loot01.png");
 	Bird = gelLoadImage("Chicken.png");
+	
+//	Jayson = gelLoadJSON("Fun.json");
+//	Samson = gelLoadText("Fun.json");
 
 	// Once Loaded //
 	gelOnLoad(function(){
 		Log("Hello from OnLoad!");
+		
+//		Log( Jayson.data );
+//		Log( Samson.data );
 
 		subcanvas = gelCanvasCreate( { width:160, height:100 } );
 		gelCanvasSmoothing( subcanvas, false );
@@ -57,7 +64,7 @@ function Draw() {
 		0,0	
 	);
 
-	c.drawImage(Food,0,0);
+	c.drawImage(Food.data,0,0);
 
 	c.setTransform(
 		1,0,	// A B 0 //
@@ -71,7 +78,7 @@ function Draw() {
 	c.translate( HalfWidth + (Math.cos(Radian) * HalfWidth / 2), HalfHeight + (Math.sin(Radian) * HalfHeight / 2) );
 	c.rotate((Angle*12) * Math.PI/360);
 	
-	c.drawImage(Bird,-Bird.width>>1,-Bird.height>>1);
+	c.drawImage(Bird.data,-Bird.data.width>>1,-Bird.data.height>>1);
 
 	// *** //
 
