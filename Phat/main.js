@@ -10,7 +10,7 @@ function Setup() {
 
 	// Preload stuff //
 	Music = gelLoadAudio({ 
-		urls: ["Garth-Knight-Cage.ogg", "Garth-Knight-Cage.mp3"], 
+		urls: ["Garth-Knight-Cage-Trim.ogg", "Garth-Knight-Cage-Trim.mp3"], 
 		loop:true,
 		onend:function(){
 			Angle = 0;
