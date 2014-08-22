@@ -61,12 +61,16 @@ function Draw() {
 	var y = -PreScale*0.5;
 	
 	var ex = x + (Math.sin((Angle+0)*0.0125)*((ctx.canvas.width*0.5)-(PreScale*0.5)));	
-	gelDrawSprite( ctx, Eye,4, ex,y, Scale,Scale );
+	var ey = y + (Math.sin((Angle+0)*0.035)*((ctx.canvas.height*0.1)));	
+	gelDrawSprite( ctx, Eye,4, ex,ey, Scale,Scale );
 	var ex = x + (Math.sin((Angle+2)*0.0125)*((ctx.canvas.width*0.5)-(PreScale*0.5)));	
-	gelDrawSprite( ctx, Eye,5, ex,y, Scale,Scale );
+	var ey = y + (Math.sin((Angle+2)*0.035)*((ctx.canvas.height*0.1)));	
+	gelDrawSprite( ctx, Eye,5, ex,ey, Scale,Scale );
 	var ex = x + (Math.sin((Angle+4)*0.0125)*((ctx.canvas.width*0.5)-(PreScale*0.5)));	
-	gelDrawSprite( ctx, Eye,6, ex,y, Scale,Scale );
+	var ey = y + (Math.sin((Angle+4)*0.035)*((ctx.canvas.height*0.1)));	
+	gelDrawSprite( ctx, Eye,6, ex,ey, Scale,Scale );
 	var ex = x + (Math.sin((Angle+7)*0.0125)*((ctx.canvas.width*0.5)-(PreScale*0.5)));	
-	gelDrawSprite( ctx, Eye,7, ex,y, Scale,Scale );
+	var ey = y + (Math.sin((Angle+9)*0.035)*((ctx.canvas.height*0.1)));	
+	gelDrawSprite( ctx, Eye,7, ex,ey, Scale,Scale );
 }
 // - ----------------------------------------------------------------------------------------- - //
