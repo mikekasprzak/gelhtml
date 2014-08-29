@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Syntax Higger</title>
+
+		<!-- Shut Up Firefox! -->
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
+	</head>
+	<body>
+		<div>My IP: <span id="myIp">??</span></div>
+		<div>Country: <span id="myCountry">??</span> (<span id="myCountryCode">??</span>)</div>
+		<div>City: <span id="myCity">??</span><span id="myState">??</span> (<span id="myStateCode">??</span>)</div>
+		<div>GPS: <span id="myLatitude">??</span>, <span id="myLongitude">??</span></div>
+		<br />
+		<div>Area Code: <span id="myAreaCode">??</span></div>
+		<div>Zip Code: <span id="myZipCode">??</span></div>
+		<div>Metro Code: <span id="myMetroCode">??</span></div>
+		<br />
+		<div>Use ?ip=x.x.x.x to check a specific IP. Leave blank/ignore to check self.</div>
+	</body>
+
+	<script>
+		// Borrowed from: http://stackoverflow.com/a/2880929
+		var urlParams;
+		(window.onpopstate = function () {
+		    var match,
+		        pl     = /\+/g,  // Regex for replacing addition symbol with a space
+		        search = /([^&=]+)=?([^&]*)/g,
+		        decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+		        query  = window.location.search.substring(1);
+		
+		    urlParams = {};
+		    while (match = search.exec(query))
+		       urlParams[decode(match[1])] = decode(match[2]);
+		})();
+		
+		
+		(function(){
+			var xhr = new XMLHttpRequest();
+			
+			xhr.onload = function(e) {
+				var Geo = JSON.parse(this.responseText);
+				document.querySelectorAll('#myIp')[0].textContent = Geo.ip;
+				document.querySelectorAll('#myCountry')[0].textContent = Geo.country_name;
+				document.querySelectorAll('#myCountryCode')[0].textContent = Geo.country_code;
+				document.querySelectorAll('#myCity')[0].textContent = Geo.city;
+				document.querySelectorAll('#myState')[0].textContent = ", " + Geo.region_name;
+				document.querySelectorAll('#myStateCode')[0].textContent = Geo.region_code;
+				document.querySelectorAll('#myLatitude')[0].textContent = Geo.latitude;
+				document.querySelectorAll('#myLongitude')[0].textContent = Geo.longitude;
+				
+				if ( Geo.zipcode ) document.querySelectorAll('#myZipCode')[0].textContent = Geo.zipcode;
+				if ( Geo.area_code ) document.querySelectorAll('#myAreaCode')[0].textContent = Geo.area_code;
+				if ( Geo.metro_code ) document.querySelectorAll('#myMetroCode')[0].textContent = Geo.metro_code;					
+				
+				console.log(Geo);
+			}
+			
+			var IP = "";
+			if ( typeof  urlParams.ip === "string" )
+				IP = urlParams.ip;
+			
+			xhr.open("GET", "http://freegeoip.net/json/" + IP, true);
+			xhr.send();
+		})();
+	</script>
+</html>
